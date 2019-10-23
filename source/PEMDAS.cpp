@@ -9,11 +9,12 @@ using namespace std;
 class PEMDAS
 {
 
-  //first number is numerator, multiplicand, addend, minuend
-  int x;
-
-  //second number is denominator, multiplier, addend, subtrahend
-  int y;
+  int x;//first number is numerator, multiplicand, addend, minuend
+  int y;//second number is denominator, multiplier, addend, subtrahend
+  int xLow; //lowerbound of the x variable
+  int xHigh;//upperbound of the x variable
+  int yLow;//lowerbound of the y variable
+  int yHigh;//upperbound of the y variable
 
 public:
 
@@ -29,7 +30,20 @@ public:
 
   }
 
-  int addInt(int xLow, int xHigh, int yLow, int yHigh)
+  void setXLow(int w){
+    xLow = w;
+  }
+  void setXHigh(int w){
+    xHigh = w;
+  }
+  void setYLow(int w){
+    yLow = w;
+  }
+  void setYHigh(int w){
+    yHigh = w;
+  }
+
+  int addInt()
   {
 
     x = (rand() % (xHigh - xLow)) + xLow;
@@ -39,6 +53,23 @@ public:
     cout << probText;
 
     int solution = x + y;
+
+    string solutionText = probText + to_string(solution);
+
+    return solution;
+
+  }
+
+  int subInt()
+  {
+
+    x = (rand() % (xHigh - xLow)) + xLow;
+    y = (rand() % (yHigh - yLow)) + yLow;
+
+    string probText = to_string(x) + " - " + to_string(y) + " = ";
+    cout << probText;
+
+    int solution = x - y;
 
     string solutionText = probText + to_string(solution);
 
@@ -60,19 +91,19 @@ int main(){
 
   cout << "Please define the upperbound of the first addend: ";
   cin >> input;
-  int xUp = input;
+  testDas.setXHigh(input);
 
   cout << "Please define the lowerbound of the first addend: ";
   cin >> input;
-  int xLow = input;
+  testDas.setXLow(input);
 
   cout << "Please define the upperbound of the second addend: ";
   cin >> input;
-  int yUp = input;
+  testDas.setYHigh(input);
 
   cout << "Please define the lowerbound of the second addend: ";
   cin >> input;
-  int yLow = input;
+  testDas.setYLow(input);
 
   cout << "\n";
 
@@ -83,7 +114,7 @@ int main(){
     if (escape == 'q'){
       return 0;}
 
-    sol = testDas.addInt(xLow, xUp, yLow, yUp);
+    sol = testDas.subInt();
 
     //cin >> escape;
     cin.get();
