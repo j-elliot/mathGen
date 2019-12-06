@@ -77,6 +77,43 @@ public:
 
   }
 
+  int mulInt()
+  {
+
+    x = (rand() % (xHigh - xLow)) + xLow;
+    y = (rand() % (yHigh - yLow)) + yLow;
+
+    string probText = to_string(x) + " X " + to_string(y) + " = ";
+    cout << probText;
+
+    int solution = x * y;
+
+    string solutionText = probText + to_string(solution);
+
+    return solution;
+
+  }
+
+  int divInt()
+  {
+
+    x = (rand() % (xHigh - xLow)) + xLow;
+    y = (rand() % (yHigh - yLow)) + yLow;
+
+    while(y == 0)
+      y = (rand() % (yHigh - yLow)) + yLow;
+
+    string probText = to_string(x) + " / " + to_string(y) + " = ";
+    cout << probText;
+
+    int solution = x / y;
+
+    string solutionText = probText + to_string(solution);
+
+    return solution;
+
+  }
+
 };
 
 //unit test
@@ -84,10 +121,14 @@ int main(){
 
   int sol;
   int input;
+  int option;
   char escape;
 
   //instantiate an object
   PEMDAS testDas;
+
+  cout << "Please select arithmetic option: \n1) Addition\n2) Subtraction\n3) Multiplication\n4) Division\n";
+  cin >> option;
 
   cout << "Please define the upperbound of the first addend: ";
   cin >> input;
@@ -114,7 +155,16 @@ int main(){
     if (escape == 'q'){
       return 0;}
 
-    sol = testDas.subInt();
+    if (option == 1){
+      sol = testDas.addInt();
+    }else if(option == 2){
+      sol = testDas.subInt();
+    }else if(option == 3){
+      sol = testDas.mulInt();
+    }else if(option == 4){
+      sol = testDas.divInt();
+    }
+
 
     //cin >> escape;
     cin.get();
